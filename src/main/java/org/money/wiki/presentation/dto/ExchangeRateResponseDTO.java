@@ -3,9 +3,13 @@ package org.money.wiki.presentation.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 // Чтобы не писать отдельные классы под курсы покупки\продажи, используем возможности Jackson
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ExchangeRateResponseDTO {
+public class ExchangeRateResponseDTO implements Serializable {
+    public static final long serialVersionUID = 2L;
+
     public static class Builder {
         private Double buyRate;
         private Double sellRate;

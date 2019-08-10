@@ -9,6 +9,8 @@ spring:
     password: needs_money
   jpa:
     open-in-view: false
+  cache:
+    jcache.config: classpath:ehcache.xml
 
 logging:
   level:

@@ -7,6 +7,8 @@ import org.money.wiki.domain.model.ExchangeRate;
 import org.money.wiki.presentation.dto.ExchangeRateResponseDTO;
 import org.money.wiki.presentation.exception.BadMnemonicsException;
 import org.money.wiki.presentation.exception.RemoteServiceError;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -27,16 +29,19 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     @Override
+    @Cacheable(value = "rates", key = "#currency")
     public ExchangeRateResponseDTO getRateOf(String currency) throws BadMnemonicsException, RemoteServiceError {
         return getRates(currency, true, true);
     }
 
     @Override
+    @Cacheable(value = "buyRates", key = "#currency")
     public ExchangeRateResponseDTO getBuyRateOf(String currency) throws BadMnemonicsException, RemoteServiceError {
         return getRates(currency, true, false);
     }
 
     @Override
+    @Cacheable(value = "sellRates", key = "#currency")
     public ExchangeRateResponseDTO getSellRateOf(String currency) throws BadMnemonicsException, RemoteServiceError {
         return getRates(currency, false, true);
     }
@@ -62,13 +67,13 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         return rateDAO.save(loadedRate);
     }
 
-    private ExchangeRateResponseDTO toDto(ExchangeRate rate, boolean buyRate, boolean sellRate){
+    private ExchangeRateResponseDTO toDto(ExchangeRate rate, boolean buyRate, boolean sellRate) {
         ExchangeRateResponseDTO.Builder builder = ExchangeRateResponseDTO.newBuilder();
 
         if (buyRate)
             builder.withBuyRate(rate.getBuyRate());
         if (sellRate)
-             builder.withSellRate(rate.getSellRate());
+            builder.withSellRate(rate.getSellRate());
 
         return builder.build();
     }
