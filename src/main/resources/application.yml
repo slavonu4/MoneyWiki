@@ -9,3 +9,9 @@ spring:
     password: needs_money
   jpa:
     open-in-view: false
+
+logging:
+  level:
+    org.springframework:
+      web:
+        filter.CommonsRequestLoggingFilter: DEBUG
