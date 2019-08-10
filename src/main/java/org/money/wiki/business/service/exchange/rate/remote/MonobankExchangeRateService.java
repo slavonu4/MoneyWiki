@@ -22,8 +22,8 @@ public class MonobankExchangeRateService implements RemoteExchangeRateService {
 
     private final RestTemplate restTemplate;
 
-    public MonobankExchangeRateService() {
-        restTemplate = new RestTemplate();
+    public MonobankExchangeRateService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -33,7 +33,6 @@ public class MonobankExchangeRateService implements RemoteExchangeRateService {
     }
 
     private Optional<MonobankExchangeRateResponseDTO> sendRequestFor(Integer currencyCode) {
-        LOGGER.info("Sending request to the Monobank API to get exchange rate for #{}", currencyCode);
         try {
             ResponseEntity<List<MonobankExchangeRateResponseDTO>> response = restTemplate.exchange(
                     "https://api.monobank.ua/bank/currency", HttpMethod.GET,
