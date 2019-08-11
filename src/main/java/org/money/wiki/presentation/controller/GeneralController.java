@@ -16,6 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 public class GeneralController {
     private static final Logger LOGGER = LoggerFactory.getLogger(GeneralController.class);
 
+    @ExceptionHandler()
+    public ResponseEntity<ErrorDTO> handleUnknownException(HttpServletRequest req, Exception ex) {
+        LOGGER.error("Unknown exception at {}: ", req.getRequestURI(), ex);
+
+        String message = String.format("Internal Server Error: %s", ex.getMessage());
+
+        return new ResponseEntity<>(new ErrorDTO(message), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
     @ExceptionHandler(BadMnemonicsException.class)
     public ResponseEntity<ErrorDTO> handleBadMnemonicsException(HttpServletRequest req, BadMnemonicsException ex){
         LOGGER.error("Attempt to get info for invalid mnemonics {} at {}", ex.getMnemonics(), req.getRequestURI());
