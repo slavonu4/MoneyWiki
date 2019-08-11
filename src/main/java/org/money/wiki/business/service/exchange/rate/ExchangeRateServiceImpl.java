@@ -2,12 +2,11 @@ package org.money.wiki.business.service.exchange.rate;
 
 import org.money.wiki.business.service.exchange.rate.remote.RemoteExchangeRateService;
 import org.money.wiki.business.service.info.CurrencyInfoService;
-import org.money.wiki.domain.dao.exchange.rate.ExchangeRateDAO;
+import org.money.wiki.domain.dao.exchange.rate.ExchangeRatesDAO;
 import org.money.wiki.domain.model.ExchangeRate;
 import org.money.wiki.presentation.dto.ExchangeRateResponseDTO;
 import org.money.wiki.presentation.exception.BadMnemonicsException;
 import org.money.wiki.presentation.exception.RemoteServiceError;
-import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +19,9 @@ import java.util.Optional;
 public class ExchangeRateServiceImpl implements ExchangeRateService {
     private final CurrencyInfoService infoService;
     private final RemoteExchangeRateService remoteExchangeRateService;
-    private final ExchangeRateDAO rateDAO;
+    private final ExchangeRatesDAO rateDAO;
 
-    public ExchangeRateServiceImpl(CurrencyInfoService infoService, RemoteExchangeRateService remoteExchangeRateService, ExchangeRateDAO rateDAO) {
+    public ExchangeRateServiceImpl(CurrencyInfoService infoService, RemoteExchangeRateService remoteExchangeRateService, ExchangeRatesDAO rateDAO) {
         this.infoService = infoService;
         this.remoteExchangeRateService = remoteExchangeRateService;
         this.rateDAO = rateDAO;

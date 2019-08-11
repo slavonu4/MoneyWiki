@@ -4,7 +4,7 @@ import org.money.wiki.domain.model.ExchangeRate;
 
 import java.util.Optional;
 
-public interface ExchangeRateDAO {
+public interface ExchangeRatesDAO {
     Optional<ExchangeRate> get(ExchangeRate.ExchangeRateId rateId);
 
     ExchangeRate save(ExchangeRate rate);

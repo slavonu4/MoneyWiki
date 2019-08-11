@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class ExchangeRateDAOImpl implements ExchangeRateDAO {
+public class ExchangeRatesDAOImpl implements ExchangeRatesDAO {
     private final ExchangeRateRepository repository;
 
-    public ExchangeRateDAOImpl(ExchangeRateRepository repository) {
+    public ExchangeRatesDAOImpl(ExchangeRateRepository repository) {
         this.repository = repository;
     }
 
