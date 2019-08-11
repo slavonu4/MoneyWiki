@@ -50,7 +50,7 @@ public class MonobankExchangeRateService implements RemoteExchangeRateService {
             return body.stream()
                     .filter(rate -> isRateFor(rate, currencyCode))
                     .findAny();
-        } catch (Exception e){
+        } catch (Exception e) {      //To deal with exception on 404 response code
             LOGGER.error("Unable to load exchange rates from Monobank API: ", e);
             return Optional.empty();
         }

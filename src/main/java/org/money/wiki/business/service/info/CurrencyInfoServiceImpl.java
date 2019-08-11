@@ -23,6 +23,7 @@ public class CurrencyInfoServiceImpl implements CurrencyInfoService {
         return currencyInfoDAO.getCodeOf(normalizedMnemonics);
     }
 
+    // To deal with difference between 'Usd', "USd', etc
     private String normalizeMnemonics(String mnemonics){
         return mnemonics.trim().toUpperCase();
     }
